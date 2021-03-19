@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(:version => 20210318214111) do
     t.date     "date_in"
     t.date     "date_out"
     t.text     "demands"
+    t.integer  "billing_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end

@@ -6,6 +6,7 @@ class CreateReservations < ActiveRecord::Migration
       t.date :date_in
       t.date :date_out
       t.text :demands
+      t.integer :billing_id
 
       t.timestamps
     end
