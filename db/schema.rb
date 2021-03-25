@@ -21,7 +21,6 @@ ActiveRecord::Schema.define(:version => 20210318214111) do
   end
 
   create_table "billings", :force => true do |t|
-    t.integer  "reservation_id"
     t.decimal  "total_amount"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false

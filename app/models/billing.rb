@@ -26,7 +26,8 @@ class Billing < ActiveRecord::Base
       total = occurence_of_rate.zip(applied_special_rates).map{|x,y| x * y}
       #puts total.length
       total_amount = (occurence_of_rate.zip(total).map { |x,y| x+y}).sum
-      puts total_amount
+      #puts total_amount
+      self.create(total_amount: total_amount)
     }
   end
 end
