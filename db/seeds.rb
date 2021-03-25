@@ -66,13 +66,13 @@ room_list.each do |name, next_door, floor, room_type, view_type, base_rate|
 end
 
 day_rate_list = [
-  ["monday", 1.00],
-  ["tuesday", 1.00],
-  ["wednesday", 1.00],
-  ["thursday", 1.10],
-  ["friday", 1.20],
-  ["saturday", 1.25],
-  ["sunday", 1.20]
+  ["Monday", 0.00],
+  ["Tuesday", 0.00],
+  ["Wednesday", 0.00],
+  ["Thursday", 0.10],
+  ["Friday", 0.20],
+  ["Saturday", 0.25],
+  ["Sunday", 0.20]
 ]
 
 day_rate_list.each do |name, rate|
@@ -80,11 +80,11 @@ day_rate_list.each do |name, rate|
 end
 
 season_rate_list = [
-  ["spring", 1.00, "2021-03-20", "2021-06-19"],
-  ["summer", 1.30, "2021-06-20", "2021-09-21"],
-  ["autumn", 1.00, "2021-09-22", "2021-12-20"],
-  ["winter", 1.20, "2021-12-21", "2022-03-19"],
-  ["construction", 1.20, "2021-07-18", "2021-07-31"]
+  ["spring", 0.00, "2021-03-20", "2021-06-19"],
+  ["summer", 0.30, "2021-06-20", "2021-09-21"],
+  ["autumn", 0.00, "2021-09-22", "2021-12-20"],
+  ["winter", 0.20, "2021-12-21", "2022-03-19"],
+  ["construction", 0.20, "2021-07-18", "2021-07-31"]
 ]
 
 season_rate_list.each do |name, rate, from_date, to_date|
@@ -105,10 +105,10 @@ end
 # reservation_id, room_id, deleted_at
 reserved_room_list = [
   [1, 1, nil],
-  [1, 2, "2021-03-21"],
-  [2, 2, nil],
-  [2, 3, nil],
-  [3, 12, nil]
+  [2, 2, "2021-03-21"],
+  [3, 2, nil],
+  [4, 3, nil],
+  [5, 12, nil]
 ]
 
 reserved_room_list.each do |reservation_id, room_id, deleted_at|

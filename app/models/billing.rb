@@ -1,4 +1,32 @@
 class Billing < ActiveRecord::Base
-  attr_accessible :reservation_id, :total_amount
+  attr_accessible :total_amount
   has_one :reservation
+
+  def self.applied_special_rates(date_in, date_out)
+    applied_day_rates = DayRate.applied_rates(date_in, date_out)
+    #puts applied_day_rates
+    applied_season_rates = SeasonRate.applied_rates(date_in, date_out)
+    #puts applied_season_rates
+    applied_day_rates.zip(applied_season_rates).map { |x,y| x+y }
+  end
+
+  def self.calculate_total
+    reserved_room_list = ReservedRoom.joins(:room).scoped
+
+    reserved_room_list.each { |reserved_room|
+      reservation = reserved_room.reservation
+      date_in = reservation.date_in
+      date_out = reservation.date_out
+      number_of_days = (date_out - date_in).to_i
+      room_rate = reserved_room.room.base_rate.rate
+      occurence_of_rate = [room_rate] * number_of_days
+
+      applied_special_rates = applied_special_rates(date_in, date_out)
+      #puts applied_special_rates
+      total = occurence_of_rate.zip(applied_special_rates).map{|x,y| x * y}
+      #puts total
+      total_amount = (occurence_of_rate.zip(total).map { |x,y| x+y}).sum
+      puts total_amount
+    }
+  end
 end
