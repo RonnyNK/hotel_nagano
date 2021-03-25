@@ -17,14 +17,14 @@ class Billing < ActiveRecord::Base
       reservation = reserved_room.reservation
       date_in = reservation.date_in
       date_out = reservation.date_out
-      number_of_days = (date_out - date_in).to_i
+      number_of_days = (date_out - date_in).to_i + 1
       room_rate = reserved_room.room.base_rate.rate
       occurence_of_rate = [room_rate] * number_of_days
 
       applied_special_rates = applied_special_rates(date_in, date_out)
-      #puts applied_special_rates
+      #puts applied_special_rates.length
       total = occurence_of_rate.zip(applied_special_rates).map{|x,y| x * y}
-      #puts total
+      #puts total.length
       total_amount = (occurence_of_rate.zip(total).map { |x,y| x+y}).sum
       puts total_amount
     }
