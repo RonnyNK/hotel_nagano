@@ -1,7 +1,8 @@
 class SeasonRate < ActiveRecord::Base
   attr_accessible :from_date, :name, :rate, :to_date
   validates :from_date, :name, :rate, :to_date, presence: true
-  scope :between_dates, ->(date) {where("? BETWEEN from_date AND to_date", date)}
+  scope :between_dates, ->(date) { where("? BETWEEN from_date AND to_date", date) }
+
   def self.applied_rates(date_begin, date_end)
     applicable = []
     date = date_begin

@@ -7,7 +7,7 @@ class Billing < ActiveRecord::Base
     #puts applied_day_rates
     applied_season_rates = SeasonRate.applied_rates(date_in, date_out)
     #puts applied_season_rates
-    applied_day_rates.zip(applied_season_rates).map { |x,y| x+y }
+    applied_day_rates.zip(applied_season_rates).map { |x, y| x + y }
   end
 
   def self.calculate_total
@@ -23,9 +23,9 @@ class Billing < ActiveRecord::Base
 
       applied_special_rates = applied_special_rates(date_in, date_out)
       #puts applied_special_rates.length
-      total = occurence_of_rate.zip(applied_special_rates).map{|x,y| x * y}
+      total = occurence_of_rate.zip(applied_special_rates).map { |x, y| x * y }
       #puts total.length
-      total_amount = (occurence_of_rate.zip(total).map { |x,y| x+y}).sum
+      total_amount = (occurence_of_rate.zip(total).map { |x, y| x + y }).sum
       #puts total_amount
       self.create(total_amount: total_amount)
     }
