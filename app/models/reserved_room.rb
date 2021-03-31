@@ -6,4 +6,7 @@ class ReservedRoom < ActiveRecord::Base
   scope :not_deleted, -> {
     where(deleted_at: nil)
   }
+  scope :deleted, -> {
+    where('deleted_at IS NOT NULL')
+  }
 end

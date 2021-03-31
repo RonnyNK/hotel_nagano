@@ -1,0 +1,14 @@
+%h1 Available rooms
+%table
+  %tr
+    %th Room Name
+    %th View Type
+    %th Room Type
+    %th Price
+
+  - @rooms.each do |room|
+    %tr
+      %td= room.name
+      %td= room.view_type.name
+      %td= room.room_type.name
+      %td= room.base_rate.rate

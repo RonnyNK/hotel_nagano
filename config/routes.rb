@@ -1,4 +1,6 @@
 HotelNagano::Application.routes.draw do
+  resources :rooms
+
   resources :reserved_rooms
 
   resources :reservations
