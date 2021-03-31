@@ -1,0 +1,13 @@
+%p#notice= notice
+%p
+  %b Client:
+  = @reservation.client.first_name + " " + @reservation.client.last_name
+%p
+  %b Reserved at:
+  = @reservation.reserved_at
+%p
+  %b Billing:
+  = @reservation.billing.total_amount.to_s + " $"
+= link_to 'Edit', edit_reservation_path(@reservation)
+|
+= link_to 'Back', reservations_path

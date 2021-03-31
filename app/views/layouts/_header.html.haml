@@ -1,8 +1,9 @@
 %header.navbar.navbar-fixed-top.navbar-inverse
   .navbar-inner
     .container
-      = link_to "Hotel Nagano", '#', id: "logo"
+      = link_to "Hotel Nagano", home_index_path, id: "logo"
       %nav
         %ul.nav.pull-right
           %li= link_to "Home", home_index_path
           %li= link_to "Clients", clients_path
+          %li= link_to "Reservations", reservations_path

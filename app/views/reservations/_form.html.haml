@@ -1,12 +1,12 @@
-= form_for(@client) do |f|
-  - if @client.errors.any?
+= form_for(@reservation) do |f|
+  - if @reservation.errors.any?
     #errorExplanation
       %h2
-        = pluralize(@client.errors.count, "error")
+        = pluralize(@reservation.errors.count, "error")
         prohibited
-        this client from being saved:
+        this reservation from being saved:
       %ul
-        - @client.errors.full_messages.each do |msg|
+        - @reservation.errors.full_messages.each do |msg|
           %li= msg
   .field
     = f.label :first_name
@@ -20,5 +20,7 @@
     = f.label :email
     %br/
     = f.text_field :email
+  .field
+    = f.label
   .actions
     = f.submit

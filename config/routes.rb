@@ -1,4 +1,6 @@
 HotelNagano::Application.routes.draw do
+  resources :reservations
+
   resources :clients
 
   get "home/index"

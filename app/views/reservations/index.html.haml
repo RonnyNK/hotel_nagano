@@ -1,0 +1,15 @@
+%h1 Reservations history
+%table
+  %tr
+    %th Date In
+    %th Date Out
+    %th Demands
+    %th
+    %th
+    %th
+  - @reservations.each do |reservation|
+    %tr
+      %td= reservation.date_in
+      %td= reservation.date_out
+      %td= reservation.demands
+      %td= link_to 'Details', reservation
