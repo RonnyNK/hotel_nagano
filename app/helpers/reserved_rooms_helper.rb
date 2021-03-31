@@ -1,0 +1,2 @@
+module ReservedRoomsHelper
+end

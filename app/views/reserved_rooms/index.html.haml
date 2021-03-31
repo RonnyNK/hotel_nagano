@@ -1,0 +1,10 @@
+%h1 Reserved rooms
+%table
+  %tr
+    %th Room Name
+    %th Reserved until
+
+  - @reserved_rooms.each do |reserved_room|
+    %tr
+      %td= reserved_room.room.name
+      %td= reserved_room.reservation.date_out

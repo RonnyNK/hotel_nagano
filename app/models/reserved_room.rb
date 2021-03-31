@@ -3,5 +3,7 @@ class ReservedRoom < ActiveRecord::Base
   belongs_to :reservation
   belongs_to :room
   validates :reservation_id, :room_id, presence: true
-  scope :not_deleted, -> {where('deleted_at = nil')}
+  scope :not_deleted, -> {
+    where(deleted_at: nil)
+  }
 end
