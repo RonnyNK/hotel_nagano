@@ -3,6 +3,8 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.22.5'
 gem 'bootstrap'
 gem 'haml-rails'
+gem 'bootstrap-datepicker-rails'
+
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

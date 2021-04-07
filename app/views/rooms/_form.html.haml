@@ -1,0 +1,8 @@
+= form_tag rooms_path, method: :get do
+  = label_tag "Date Check In: "
+  = text_field_tag :date_in, params[:date_in], 'data-behaviour' => 'datepicker'
+  %br/
+  = label_tag "Date Check Out: "
+  = text_field_tag :date_out, params[:date_out], 'data-behaviour' => 'datepicker'
+  %br/
+  = submit_tag "Search"

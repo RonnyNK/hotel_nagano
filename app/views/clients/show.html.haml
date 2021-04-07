@@ -8,6 +8,14 @@
 %p
   %b Email:
   = @client.email
+
+- if @client.reservations.any?
+  %h2 Reservations
+  = render @client.reservations
+
+%h2 Add a reservation:
+= render "reservations/form"
+
 = link_to 'Edit', edit_client_path(@client)
 |
 = link_to 'Back', clients_path

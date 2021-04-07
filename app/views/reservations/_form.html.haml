@@ -1,26 +1,16 @@
-= form_for(@reservation) do |f|
-  - if @reservation.errors.any?
-    #errorExplanation
-      %h2
-        = pluralize(@reservation.errors.count, "error")
-        prohibited
-        this reservation from being saved:
-      %ul
-        - @reservation.errors.full_messages.each do |msg|
-          %li= msg
+= form_for([@client, @client.reservations.build]) do |f|
   .field
-    = f.label :first_name
+    = f.label "Date Check In"
     %br/
-    = f.text_field :first_name
+    = f.text_field :date_in, 'data-behaviour' => 'datepicker'
   .field
-    = f.label :last_name
+    = f.label "Date Check Out"
     %br/
-    = f.text_field :last_name
+    = f.text_field :date_out, 'data-behaviour' => 'datepicker'
   .field
-    = f.label :email
+    = f.label :demands
     %br/
-    = f.text_field :email
-  .field
-    = f.label
+    = f.text_area :demands, cols: 30, rows: 5
+
   .actions
     = f.submit

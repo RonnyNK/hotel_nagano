@@ -9,4 +9,7 @@ class ReservedRoom < ActiveRecord::Base
   scope :deleted, -> {
     where('deleted_at IS NOT NULL')
   }
+  scope :overlap, ->(date_in, date_out) {
+    joins(:reservation).merge(Reservation.overlap(date_in, date_out))
+  }
 end

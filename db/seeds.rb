@@ -115,15 +115,15 @@ reserved_room_list.each do |reservation_id, room_id, deleted_at|
   ReservedRoom.create(reservation_id: reservation_id, room_id: room_id, deleted_at: deleted_at)
 end
 
-# client_id, reserved_at, date_in, date_out, demands, billing_id
+# client_id, date_in, date_out, demands, billing_id
 reservation_list = [
-  [1, "2021-02-27", "2021-03-23", "2021-03-30", "none", 2],
-  [1, "2021-01-02", "2021-03-14", "2021-03-21", "Chair for baby", 1],
-  [2, "2021-02-26", "2021-03-23", "2021-03-30", "Ergonomic table for laptop", 3],
-  [2, "2021-02-26", "2021-03-23", "2021-03-30", "none", 3],
-  [3, "2021-02-25", "2021-03-23", "2021-03-30", "none", 4]
+  [1, "2021-03-23", "2021-03-30", "none", 2],
+  [1, "2021-03-14", "2021-03-21", "Chair for baby", 1],
+  [2, "2021-03-23", "2021-03-30", "Ergonomic table for laptop", 3],
+  [2, "2021-03-23", "2021-03-30", "none", 3],
+  [3, "2021-03-23", "2021-03-30", "none", 4]
 ]
 
-reservation_list.each do |client_id, reserved_at, date_in, date_out, demands, billing_id|
-  Reservation.create(client_id: client_id, reserved_at: reserved_at, date_in: date_in, date_out: date_out, demands: demands, billing_id: billing_id)
+reservation_list.each do |client_id, date_in, date_out, demands, billing_id|
+  Reservation.create(client_id: client_id, date_in: date_in, date_out: date_out, demands: demands, billing_id: billing_id)
 end

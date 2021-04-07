@@ -1,11 +1,17 @@
 HotelNagano::Application.routes.draw do
+  get "rooms/search"
+
+  resources :admin
+
   resources :rooms
 
   resources :reserved_rooms
 
   resources :reservations
 
-  resources :clients
+  resources :clients do
+    resources :reservations
+  end
 
   get "home/index"
 

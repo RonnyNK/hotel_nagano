@@ -1,8 +1,14 @@
 !!!
 %html
   %body
+    %nav
+      %ul.nav.pull-right
+        %li= link_to "Administration", admin_index_path
+        %li= link_to "I am a client", clients_path
+        %li= link_to "Look for available rooms", rooms_path
     - provide(:title, 'Home')
     %title
       Hotel Nagano | #{yield(:title)}
-    %h1 Home
+    %h1 Welcome to Hotel Nagano!
     %p Mauris congue per bibendum velit duis eget in taciti aptent. Litora eros nostra dis ut, curabitur aliquet vel per. Natoque cum fames magnis mollis. Eros lacus natoque ornare a senectus eget. Mauris eu purus gravida risus cras convallis phasellus mi hendrerit condimentum hac magnis. Ultricies nostra iaculis eu per. Luctus mi porttitor diam elit arcu nunc, etiam lectus.
+

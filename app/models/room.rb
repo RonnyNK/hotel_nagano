@@ -11,4 +11,10 @@ class Room < ActiveRecord::Base
   scope :available, -> {
     where('id NOT IN (?)', unavailable)
   }
+  scope :overlap, ->(date_in, date_out) {
+    joins(:reserved_rooms).merge(ReservedRoom.overlap(date_in, date_out))
+  }
+  scope :no_overlap, ->(date_in, date_out) {
+    where('id NOT IN (?)', overlap(date_in, date_out))
+  }
 end
