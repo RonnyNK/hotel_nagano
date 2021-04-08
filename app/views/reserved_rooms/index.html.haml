@@ -3,8 +3,10 @@
   %tr
     %th Room Name
     %th Reserved until
+    %th
 
   - @reserved_rooms.each do |reserved_room|
     %tr
       %td= reserved_room.room.name
       %td= reserved_room.reservation.date_out
+      %td= link_to "Destroy", reserved_room, method: :delete,  data: { confirm: 'Are you sure?' }

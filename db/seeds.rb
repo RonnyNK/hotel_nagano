@@ -8,7 +8,7 @@
 
 view_type_list = [
   "parking",
-  "window"
+  "sea"
 ]
 
 view_type_list.each do |name|

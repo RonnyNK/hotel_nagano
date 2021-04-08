@@ -1,5 +1,4 @@
 HotelNagano::Application.routes.draw do
-  get "rooms/search"
 
   resources :admin
 
