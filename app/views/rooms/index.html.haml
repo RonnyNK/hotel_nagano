@@ -1,19 +1,28 @@
 %h1 Available rooms
-%h2 Available today
-%table
-  %tr
-    %th Room Name
-    %th View Type
-    %th Room Type
-    %th Price
 
-  - @rooms.each do |room|
-    %tr
-      %td= room.name
-      %td= room.view_type.name
-      %td= room.room_type.name
-      %td= room.base_rate.rate
-%br/
-%h2 Search rooms by dates
+%h2 Search rooms by criteria
 = render 'form'
+%br/
 
+- if @rooms_searched.present?
+  %h2 Rooms available from criteria
+  - @rooms = @rooms_searched
+- else
+  %h2 Available today
+
+- if @rooms.present?
+  %table
+    %tr
+      %th Room Name
+      %th View Type
+      %th Room Type
+      %th Price
+
+    - @rooms.each do |room|
+      %tr
+        %td= room.name
+        %td= room.view_type.name
+        %td= room.room_type.name
+        %td= room.base_rate.rate
+- else
+  %h3 Sorry, no available rooms

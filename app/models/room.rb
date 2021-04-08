@@ -17,4 +17,7 @@ class Room < ActiveRecord::Base
   scope :no_overlap, ->(date_in, date_out) {
     where('id NOT IN (?)', overlap(date_in, date_out))
   }
+  scope :by_view, ->(view_type_id) {
+    where('view_type_id IS ?', view_type_id)
+  }
 end

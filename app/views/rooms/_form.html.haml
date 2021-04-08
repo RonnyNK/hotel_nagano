@@ -5,4 +5,13 @@
   = label_tag "Date Check Out: "
   = text_field_tag :date_out, params[:date_out], 'data-behaviour' => 'datepicker'
   %br/
+  = label_tag "Type of View: "
+  = select_tag :view_type_id, options_from_collection_for_select(ViewType.all, "id", "name", params[:view_type_id]), include_blank: true
+  %br/
+  = label_tag "Type of Room"
+  = select_tag :room_type_id, options_from_collection_for_select(RoomType.all, "id", "name", params[:room_type_id]), include_blank: true
+  %br/
+  = label_tag "Contiguous rooms: "
+  = check_box_tag "Contiguous rooms"
+  %br/
   = submit_tag "Search"
