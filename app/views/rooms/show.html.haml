@@ -1,0 +1,20 @@
+%p#notice= notice
+%p
+  %b Room Name:
+  = @room.name
+%p
+  %b Room Next Door:
+  = @room.next_door
+%p
+  %b View Type:
+  = @room.view_type.name
+%p
+  %b Room Type:
+  = @room.room_type.name
+%p
+  %b Base Rate (CAD):
+  = "#{@room.base_rate.rate}" + " $"
+
+= link_to 'Edit', edit_room_path(@room)
+|
+= link_to 'Back', rooms_path

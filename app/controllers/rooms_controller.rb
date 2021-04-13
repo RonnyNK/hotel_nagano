@@ -1,29 +1,57 @@
 class RoomsController < ApplicationController
   def index
-    if params[:date_in].present? && params[:date_out].present?
-      date_in = params[:date_in]
-      date_out = params[:date_out]
+    @rooms = Room.all
+  end
 
-      @rooms_searched = Room.no_overlap(date_in, date_out)
+  def edit
+    @room = Room.find(params[:id])
+  end
 
-      if @rooms_searched.empty?
-        @rooms_searched = Room.all
+  def show
+    @room = Room.find(params[:id])
+  end
+
+  def new
+    @room = Room.new
+  end
+
+  def create
+    @room = Room.new(params[:room])
+
+    respond_to do |format|
+      if @room.save
+        format.html  { redirect_to(@room,
+                                   :notice => 'Room was successfully created.') }
+        format.json  { render :json => @room,
+                              :status => :created, :location => @room }
+      else
+        format.html  { render :action => "new" }
+        format.json  { render :json => @room.errors,
+                              :status => :unprocessable_entity }
       end
-
-      if params[:view_type_id].present?
-        @rooms_searched = @rooms_searched.select {|room| (room.view_type_id).to_s == params[:view_type_id]}
-      end
-
-      if params[:room_type_id].present?
-        @rooms_searched = @rooms_searched.select {|room| (room.room_type_id).to_s == params[:room_type_id]}
-      end
-    else
-      @rooms = Room.available
     end
   end
 
-  def search
+  def update
+    @room = Room.find(params[:id])
 
+    respond_to do |format|
+      if @room.update_attributes(params[:room])
+        format.html  { redirect_to(@room,
+                                   :notice => 'Room was successfully updated.') }
+        format.json  { head :no_content }
+      else
+        format.html  { render :action => "edit" }
+        format.json  { render :json => @room.errors,
+                              :status => :unprocessable_entity }
+      end
+    end
+  end
+
+  def destroy
+    @room = Room.find(params[:id])
+    @room.destroy
+    redirect_to rooms_url
   end
 
 end

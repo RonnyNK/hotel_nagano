@@ -1,28 +1,24 @@
-%h1 Available rooms
+%h1 Rooms
 
-%h2 Search rooms by criteria
-= render 'form'
-%br/
-
-- if @rooms_searched.present?
-  %h2 Rooms available from criteria
-  - @rooms = @rooms_searched
-- else
-  %h2 Available today
-
-- if @rooms.present?
-  %table
+%table
+  %tr
+    %th Room Name
+    %th Room Floor
+    %th View Type
+    %th Room Type
+    %th Base Rate (CAD)
+    %th
+    %th
+    %th
+  - @rooms.each do |room|
     %tr
-      %th Room Name
-      %th View Type
-      %th Room Type
-      %th Price
-
-    - @rooms.each do |room|
-      %tr
-        %td= room.name
-        %td= room.view_type.name
-        %td= room.room_type.name
-        %td= room.base_rate.rate
-- else
-  %h3 Sorry, no available rooms
+      %td= room.name
+      %td= room.floor
+      %td= room.view_type.name
+      %td= room.room_type.name
+      %td= "#{room.base_rate.rate}" + "$"
+      %td= link_to 'Show', room
+      %td= link_to 'Edit', edit_room_path(room)
+      %td= link_to 'Destroy', room, method: :delete, data: { confirm: 'Are you sure?' }
+%br/
+= link_to 'New Room', new_room_path
