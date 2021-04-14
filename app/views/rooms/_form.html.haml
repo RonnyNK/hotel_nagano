@@ -29,7 +29,7 @@
     %br/
     = f.collection_select :room_type_id, RoomType.all, :id, :name
   .field
-    = f.label "Base rate ($)"
+    = f.label :base_rate_id
     %br/
     = f.collection_select :base_rate_id, BaseRate.all, :id, :rate
   .actions

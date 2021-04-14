@@ -51,7 +51,12 @@ class ClientsController < ApplicationController
   def destroy
     @client = Client.find(params[:id])
     @client.destroy
-    redirect_to clients_url
+
+    respond_to do |format|
+      format.html { redirect_to clients_url }
+      format.json { head :no_content }
+      format.js   { render :layout => false }
+    end
   end
 
 end
