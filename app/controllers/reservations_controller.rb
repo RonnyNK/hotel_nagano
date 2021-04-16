@@ -13,6 +13,10 @@ class ReservationsController < ApplicationController
 
   def new
     @reservation = Reservation.new
+    @room_ids = params[:room_ids]
+    @room_ids.each do |room_id|
+      ReservedRoom.create(@reservation.id, room_id)
+    end
   end
 
   def create
@@ -40,7 +44,12 @@ class ReservationsController < ApplicationController
   def destroy
     @reservation = Reservation.find(params[:id])
     @reservation.destroy
-    redirect_to reservations_url
+
+    respond_to do |format|
+      format.html { redirect_to reservations_url }
+      format.json { head :no_content }
+      format.js   { render :layout => false }
+    end
   end
 
 end

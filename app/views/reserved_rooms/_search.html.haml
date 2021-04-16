@@ -1,17 +1,28 @@
-= form_tag reserved_rooms_path, method: :get, remote: true do
-  = label_tag "Date Check In: "
-  = text_field_tag :date_in, params[:date_in], 'data-behaviour' => 'datepicker'
-  %br/
-  = label_tag "Date Check Out: "
-  = text_field_tag :date_out, params[:date_out], 'data-behaviour' => 'datepicker'
-  %br/
-  = label_tag "Type of View: "
-  = select_tag :view_type_id, options_from_collection_for_select(ViewType.all, "id", "name", params[:view_type_id]), include_blank: true
-  %br/
-  = label_tag "Type of Room"
-  = select_tag :room_type_id, options_from_collection_for_select(RoomType.all, "id", "name", params[:room_type_id]), include_blank: true
-  %br/
-  = label_tag "Contiguous rooms: "
-  = check_box_tag "Contiguous rooms"
-  %br/
-  = submit_tag "Search"
+%div.search
+  = form_tag reserved_rooms_path, method: :get, remote: true do
+
+    = label_tag "Number of rooms"
+    = text_field_tag :number_rooms, params[:number_rooms], :onkeyup => 'this.form.submit();'
+
+    %br/
+    = label_tag "Date Check In: "
+    = text_field_tag :date_in, params[:date_in], 'data-behaviour' => 'datepicker'
+
+    %br/
+    = label_tag "Date Check Out: "
+    = text_field_tag :date_out, params[:date_out], 'data-behaviour' => 'datepicker'
+
+    %br/
+    = label_tag "Type of View: "
+    = select_tag :view_type_id, options_from_collection_for_select(ViewType.all, "id", "name", params[:view_type_id]), include_blank: true
+
+    %br/
+    = label_tag "Type of Room"
+    = select_tag :room_type_id, options_from_collection_for_select(RoomType.all, "id", "name", params[:room_type_id]), include_blank: true
+    - if params[:number_rooms].present? and params[:number_rooms] > '1'
+      %br/
+      = label_tag "Contiguous rooms: "
+      = check_box_tag "Contiguous rooms"
+
+    %br/
+    = submit_tag "Search"

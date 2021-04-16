@@ -6,19 +6,25 @@
     %h2 Available today
 
   - if @rooms.present?
-    %table
-      %tr
-        %th Room Name
-        %th View Type
-        %th Room Type
-        %th Price (CAD)
-
-      - @rooms.each do |room|
+    = form_tag reserved_rooms_path, method: :get do
+      %table
         %tr
-          %td= room.name
-          %td= room.view_type.name
-          %td= room.room_type.name
-          %td= "#{room.base_rate.rate}" + " $"
+          %th Room Name
+          %th View Type
+          %th Room Type
+          %th Price (CAD)
+          %th Selected
 
+        - @rooms.each do |room|
+          %tr
+            %td= room.name
+            %td= room.view_type.name
+            %td= room.room_type.name
+            %td= "#{room.base_rate.rate}" + " $"
+            %td= check_box_tag 'room_ids[]', room.id
+      = label_tag "Choose client: "
+      = select_tag :client_id, options_from_collection_for_select(Client.all, "id", :full_name, params[:client_id]), include_blank: true
+      = link_to "Not in the list?", new_client_path
+      = submit_tag "Reserve"
   - else
     %h3 Sorry, no available rooms

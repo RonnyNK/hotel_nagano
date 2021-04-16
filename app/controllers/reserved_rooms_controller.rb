@@ -17,6 +17,7 @@ class ReservedRoomsController < ApplicationController
       if params[:room_type_id].present?
         @rooms_searched = @rooms_searched.select {|room| (room.room_type_id).to_s == params[:room_type_id]}
       end
+
     else
       @rooms = Room.available
     end
