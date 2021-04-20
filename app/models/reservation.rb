@@ -7,4 +7,7 @@ class Reservation < ActiveRecord::Base
   scope :overlap, ->(date_in, date_out){
     where("? BETWEEN date_in AND date_out OR ? BETWEEN date_in AND date_out ", date_in, date_out)
   }
+  scope :today, -> {
+    where("? BETWEEN date_in AND date_out", Date.current)
+  }
 end

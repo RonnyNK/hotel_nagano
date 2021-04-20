@@ -1,5 +1,7 @@
 HotelNagano::Application.routes.draw do
 
+  resources :statistics
+
   resources :admin
 
   resources :rooms
