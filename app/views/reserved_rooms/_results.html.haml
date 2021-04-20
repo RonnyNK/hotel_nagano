@@ -6,7 +6,7 @@
     %h2 Available today
 
   - if @rooms.present?
-    = form_tag reserved_rooms_path, method: :get do
+    = form_tag new_reserved_room_path, method: :get do
       %table
         %tr
           %th Room Name
@@ -23,8 +23,11 @@
             %td= "#{room.base_rate.rate}" + " $"
             %td= check_box_tag 'room_ids[]', room.id
       = label_tag "Choose client: "
-      = select_tag :client_id, options_from_collection_for_select(Client.all, "id", :full_name, params[:client_id]), include_blank: true
+      = select_tag 'client_id', options_from_collection_for_select(Client.all, "id", :full_name, params[:client_id]), include_blank: true
       = link_to "Not in the list?", new_client_path
+      = hidden_field_tag "date_in", params[:date_in]
+      = hidden_field_tag "date_out", params[:date_out]
+      %br/
       = submit_tag "Reserve"
   - else
     %h3 Sorry, no available rooms

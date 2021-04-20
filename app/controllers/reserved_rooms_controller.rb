@@ -28,6 +28,38 @@ class ReservedRoomsController < ApplicationController
     end
   end
 
+  def new
+    @client = Client.find(params[:client_id])
+    date_in = params[:date_in]
+    date_out = params[:date_out]
+    @reservation = @client.reservations.new(date_in: date_in, date_out: date_out)
+    @reserved_rooms = []
+    params[:room_ids].each do |room_id|
+      reserved_room = ReservedRoom.new
+      reserved_room.room_id = room_id
+      reserved_room.reservation_id = @reservation.id
+      @reserved_rooms.append(reserved_room)
+    end
+    @rooms = []
+    @reserved_rooms.each do |reserved_room|
+      @rooms.append(reserved_room.room)
+    end
+  end
+
+  def create
+    @client = Client.find(params[:client_id])
+    date_in = params[:date_in]
+    date_out = params[:date_out]
+    demands = params[:demands]
+    @reservation = @client.reservations.create(date_in: date_in, date_out: date_out, demands: demands)
+    room_ids = params[:room_ids]
+    room_ids.each do |room_id|
+      ReservedRoom.create(room_id: room_id, reservation_id: @reservation.id)
+    end
+    ClientMailer.billing_reservation(@client).deliver
+    redirect_to client_path(@client)
+  end
+
   def destroy
     @reserved_room = ReservedRoom.find(params[:id])
     @reserved_room.update_attribute(:deleted_at, Date.current)

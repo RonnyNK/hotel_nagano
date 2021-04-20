@@ -1,0 +1,36 @@
+%h1 Reserving rooms
+
+= form_tag action: :create do
+  = label_tag "Client: "
+  = @client.full_name
+  = hidden_field_tag :client_id, @client.id
+
+  %br/
+  = label_tag "Reservation from"
+  = @reservation.date_in
+  = hidden_field_tag :date_in, params[:date_in]
+  = label_tag "to"
+  = @reservation.date_out
+  = hidden_field_tag :date_out, params[:date_out]
+  %br/
+  %table
+    %tr
+      %th Room Name
+      %th View Type
+      %th Room Type
+      %th Price (CAD)
+
+    - @rooms.each do |room|
+      %tr
+        %td= room.name
+        %td= room.view_type.name
+        %td= room.room_type.name
+        %td= "#{room.base_rate.rate}" + " $"
+        %td= check_box_tag 'room_ids[]', room.id, value: true
+
+  %br/
+  = label_tag "Demands: "
+  %br/
+  = text_area_tag :demands, params[:demands], cols: 30, row: 5
+  %br/
+  = submit_tag "Confirm"

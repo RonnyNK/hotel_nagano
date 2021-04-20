@@ -1,0 +1,12 @@
+!!!
+%html
+  %head
+    %meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+  %body
+    %h1
+      Hello, #{@client.full_name}
+
+    %p Your reservation from #{@reservation.date_in} to #{@reservation.date_out} has been confirmed!
+    %p You have reserved #{@reserved_rooms.length} rooms
+    %p Sup #{@room_ids}
+    %p Have a great stay!

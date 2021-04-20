@@ -13,15 +13,15 @@ class ReservationsController < ApplicationController
 
   def new
     @reservation = Reservation.new
-    @room_ids = params[:room_ids]
-    @room_ids.each do |room_id|
-      ReservedRoom.create(@reservation.id, room_id)
-    end
   end
 
   def create
     @client = Client.find(params[:client_id])
     @reservation = @client.reservations.create(params[:reservation])
+    @reserved_rooms.each do |reserved_room|
+      reserved_room.reservation_id = @reservation.id
+      reserved_room.save
+    end
     redirect_to client_path(@client)
   end
 

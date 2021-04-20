@@ -93,7 +93,7 @@ end
 
 client_list = [
   ["Ronny", "Nou-Khlot", "ronny.nou-khlot@semiweb.ca"],
-  ["Evan", "Hutchinson", "evan.hutchinson@semitweb.ca"],
+  ["Evan", "Hutchinson", "evan.hutchinson@semiweb.ca"],
   ["Greg", "Hubin", "greg.hubin@semiweb.ca"],
   ["Toto", "Tata", "toto.tata@semiweb.ca"]
 ]
