@@ -1,18 +1,36 @@
-%p#notice= notice
-%p
-  %b First Name:
-  = @client.first_name
-%p
-  %b Last Name:
-  = @client.last_name
-%p
-  %b Email:
-  = @client.email
+.container-fluid
+  %p#notice= notice
+  %p
+    %b First Name:
+    = @client.first_name
+  %p
+    %b Last Name:
+    = @client.last_name
+  %p
+    %b Email:
+    = @client.email
 
-- if @client.reservations.any?
-  %h2 Reservations
-  = render @client.reservations
+  - if @reservations.any?
+    %h2 Reservations
+    %table.table.table-hover
+      %thead
+        %tr
+          %th Date In
+          %th Date Out
+          %th Demands
+          %th Reserved rooms
+          %th Total price (CAD)
+          %th
+        - @reservations.each do |reservation|
+          %tr
+            %td= reservation.date_in
+            %td= reservation.date_out
+            %td= reservation.demands
+            %td= (reservation.reserved_rooms.map{|reserved_room| reserved_room.room.name}).join(', ')
+            %td= "#{reservation.billing.total_amount}" + ' $'
+            %td= link_to "Details", billing_path(reservation)
+  %br/
 
-= link_to 'Edit', edit_client_path(@client)
-|
-= link_to 'Back', clients_path
+  = link_to 'Edit', edit_client_path(@client)
+  |
+  = link_to 'Back', clients_path

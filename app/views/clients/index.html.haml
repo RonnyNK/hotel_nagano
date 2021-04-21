@@ -1,20 +1,21 @@
-%h1 Listing clients
-%table
-  %tr
-    %th First Name
-    %th Last Name
-    %th Email
-    %th
-    %th
-    %th
-  - @clients.each do |client|
-    %tr
-      %td= client.first_name
-      %td= client.last_name
-      %td= client.email
-      %td= link_to 'Show', client
-      %td= link_to 'Edit', edit_client_path(client)
-      %td= link_to 'Destroy', client, method: :delete, data: { confirm: 'Are you sure?' },
-      :remote => true, :class => 'delete_client'
-%br/
-= link_to 'New Client', new_client_path
+.container-fluid
+  %h2 Listing clients
+  %table.table.table-hover
+    %thead
+      %tr
+        %th First Name
+        %th Last Name
+        %th Email
+        %th
+        %th
+      %tbody
+        - @clients.each do |client|
+          %tr
+            %td= client.first_name
+            %td= client.last_name
+            %td= client.email
+            %td= link_to 'Show', client
+            %td= link_to 'Edit', edit_client_path(client)
+
+  %br/
+  = link_to 'New Client', new_client_path

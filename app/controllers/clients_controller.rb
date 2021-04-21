@@ -9,6 +9,7 @@ class ClientsController < ApplicationController
 
   def show
     @client = Client.find(params[:id])
+    @reservations = @client.reservations
   end
 
   def new
