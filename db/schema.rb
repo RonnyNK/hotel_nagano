@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20210318214111) do
+ActiveRecord::Schema.define(:version => 20210420172754) do
 
   create_table "base_rates", :force => true do |t|
     t.decimal  "rate"
@@ -82,6 +82,11 @@ ActiveRecord::Schema.define(:version => 20210318214111) do
     t.decimal  "rate"
     t.date     "from_date"
     t.date     "to_date"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "statistics", :force => true do |t|
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
