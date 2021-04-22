@@ -13,23 +13,21 @@
   - if @reservations.any?
     %h2 Reservations
     %table.table.table-hover
-      %thead
+      %thead.table-primary
         %tr
-          %th Date In
-          %th Date Out
+          %th Check In
+          %th Check Out
           %th Demands
           %th Reserved rooms
-          %th Total price (CAD)
           %th
+      %tbody
         - @reservations.each do |reservation|
           %tr
             %td= reservation.date_in
             %td= reservation.date_out
             %td= reservation.demands
             %td= (reservation.reserved_rooms.map{|reserved_room| reserved_room.room.name}).join(', ')
-            %td= "#{reservation.billing.total_amount}" + ' $'
-            %td= link_to "Details", billing_path(reservation)
-  %br/
+            %td= link_to "Billing", billing_path(reservation)
 
   = link_to 'Edit', edit_client_path(@client)
   |
