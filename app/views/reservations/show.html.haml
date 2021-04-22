@@ -1,13 +1,30 @@
-%p#notice= notice
-%p
-  %b Client:
-  = @reservation.client.first_name + " " + @reservation.client.last_name
-%p
-  %b Reserved at:
-  = (@reservation.created_at).to_date
-%p
-  %b Billing:
-  = @reservation.billing.total_amount.to_s + " $"
-= link_to 'Edit', edit_reservation_path([@reservation, @client])
-|
-= link_to 'Back', reservations_path
+.container-fluid
+  %p#notice= notice
+
+  %p
+    %b Client:
+    = @client.full_name
+  %p
+    %b Reserved at:
+    = (@reservation.created_at).to_date
+  %p
+    %b Check In:
+    = @reservation.date_in
+  %p
+    %b Check Out:
+    = @reservation.date_out
+  %p
+    %b Stay Duration:
+    = @reservation.duration.to_s + ' days'
+  %p
+    %b Reserved Rooms:
+    = @room_names.join(', ')
+  %p
+    %b Total Amount:
+    = @reservation.billing.total_amount.to_s + " $"
+  %p
+    =link_to 'Billing details', billing_path(@reservation)
+
+  = link_to 'Edit', edit_reservation_path([@reservation, @client])
+  |
+  = link_to 'Back', reservations_path

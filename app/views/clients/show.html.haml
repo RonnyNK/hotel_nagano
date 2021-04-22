@@ -20,13 +20,15 @@
           %th Demands
           %th Reserved rooms
           %th
+          %th
       %tbody
         - @reservations.each do |reservation|
           %tr
             %td= reservation.date_in
             %td= reservation.date_out
             %td= reservation.demands
-            %td= (reservation.reserved_rooms.map{|reserved_room| reserved_room.room.name}).join(', ')
+            %td= (reservation.rooms.map{|room| room.name}).join(', ')
+            %td= link_to "Show", reservation
             %td= link_to "Billing", billing_path(reservation)
 
   = link_to 'Edit', edit_client_path(@client)

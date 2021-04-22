@@ -1,23 +1,22 @@
-%h1 Reservations
-%table.table.table-hover
-  %thead
-    %tr
-      %th Date In
-      %th Date Out
-      %th Demands
-      %th Client
-      %th
-      %th
-      %th
+.container-fluid
+  %h1 Reservations
+  %table.table.table-hover
+    %thead.table-primary
+      %tr
+        %th Check In
+        %th Check Out
+        %th Client
+        %th
+        %th
+        %th
     - @reservations.each do |reservation|
       %tr
         %td= reservation.date_in
         %td= reservation.date_out
-        %td= reservation.demands
         %td= link_to reservation.client.full_name, reservation.client
         %td= link_to 'Show', reservation
         %td= link_to 'Edit', edit_reservation_path(reservation)
         %td= link_to 'Delete', reservation, method: :delete, data: { confirm: 'Are you sure?' },
         remote: true, class: 'delete_reservation'
-%br/
-= link_to 'New Reservation', reserved_rooms_path
+  %br/
+  = link_to 'New Reservation', reserved_rooms_path

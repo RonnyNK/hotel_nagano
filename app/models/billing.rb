@@ -9,7 +9,7 @@ class Billing < ActiveRecord::Base
     applied_day_rates.zip(applied_season_rates).map { |x, y| x + y }
   end
 
-=begin
+
   def self.calculate_total
     reserved_room_list = ReservedRoom.joins(:room).scoped
 
@@ -28,7 +28,7 @@ class Billing < ActiveRecord::Base
       self.create(total_amount: total_amount)
     }
   end
-=end
+
 
   def self.calculate(reservation)
     total_amount = 0

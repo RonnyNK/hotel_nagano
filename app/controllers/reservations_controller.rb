@@ -5,10 +5,17 @@ class ReservationsController < ApplicationController
 
   def show
     @reservation = Reservation.find(params[:id])
+    @client = @reservation.client
+    @billing = @reservation.billing
+    @room_names = []
+    @reservation.reserved_rooms.each do |reserved_room|
+      @room_names.append(reserved_room.name)
+    end
   end
 
   def edit
     @reservation = Reservation.find(params[:id])
+    @client = @reservation.client
   end
 
   def new
@@ -43,6 +50,7 @@ class ReservationsController < ApplicationController
 
   def destroy
     @reservation = Reservation.find(params[:id])
+    @reservation.reserved_rooms.update_all(deleted_at: true)
     @reservation.destroy
 
     respond_to do |format|

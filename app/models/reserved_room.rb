@@ -12,4 +12,7 @@ class ReservedRoom < ActiveRecord::Base
   scope :overlap, ->(date_in, date_out) {
     joins(:reservation).merge(Reservation.overlap(date_in, date_out))
   }
+  def name
+    self.room.name
+  end
 end
