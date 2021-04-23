@@ -1,5 +1,5 @@
 class Reservation < ActiveRecord::Base
-  attr_accessible :client_id, :date_in, :date_out, :demands, :billing_id
+  attr_accessible :client_id, :date_in, :date_out, deleted_at, :demands, :billing_id
   belongs_to :client
   belongs_to :billing
   has_many :reserved_rooms

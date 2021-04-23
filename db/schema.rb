@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(:version => 20210420172754) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "email"
+    t.date     "deleted_at"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -47,6 +48,7 @@ ActiveRecord::Schema.define(:version => 20210420172754) do
     t.date     "date_in"
     t.date     "date_out"
     t.text     "demands"
+    t.date     "deleted_at"
     t.integer  "billing_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
@@ -72,6 +74,7 @@ ActiveRecord::Schema.define(:version => 20210420172754) do
     t.integer  "floor"
     t.integer  "view_type_id"
     t.integer  "room_type_id"
+    t.date     "deleted_at"
     t.integer  "base_rate_id"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false

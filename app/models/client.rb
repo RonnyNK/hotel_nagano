@@ -1,5 +1,5 @@
 class Client < ActiveRecord::Base
-  attr_accessible :email, :first_name, :last_name
+  attr_accessible :deleted_at, :email, :first_name, :last_name
   has_many :reservations, :dependent => :destroy
   has_many :reserved_rooms, :through => :reservations
   validates :email, :first_name, :last_name, presence: true

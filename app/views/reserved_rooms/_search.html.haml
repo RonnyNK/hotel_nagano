@@ -5,12 +5,12 @@
   = text_field_tag :number_rooms, params[:number_rooms], :onkeyup => 'this.form.submit();'
 
   %br/
-  = label_tag "Date Check In: "
-  = text_field_tag :date_in, params[:date_in], type: "date"
+  = label_tag "Check In: "
+  = text_field_tag :date_in, params[:date_in], type: "date", placeholder: "Choose Date"
 
   %br/
-  = label_tag "Date Check Out: "
-  = text_field_tag :date_out, params[:date_out], type: "date"
+  = label_tag "Check Out: "
+  = text_field_tag :date_out, params[:date_out], type: "date", placeholder: "Choose Date"
 
   %br/
   = label_tag "Type of View: "
