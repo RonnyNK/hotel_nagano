@@ -24,16 +24,17 @@
         - (0..@reservation.duration-1).each do |i|
           %tr
             %td= (@reservation.date_in + i).strftime("%a, %m-%d-%Y")
-            %td= "#{reserved_room.room.base_rate.rate}" + ' $'
+            %td= number_to_currency(reserved_room.rate, unit: "CAD$", format: "%n %u")
             %td= number_to_percentage(@applied_days[i][0].rate * 100, precision: 0)
             %td= @applied_seasons[i].map{|season| season.name + ": " + number_to_percentage(season.rate * 100, precision: 0)}.join(", ")
-            %td
-      %tfooter
+            %td= number_to_currency((@applied_seasons[i].map{|season| season.rate}.sum + @applied_days[i][0].rate) * reserved_room.rate + reserved_room.rate, unit: "CAD$", format: "%n %u")
+      %tfoot.table-primary
         %tr
-          %th Total
-          %td= "#{@reservation.duration * reserved_room.room.base_rate.rate}" + ' $'
+          %th Grand Total
           %td
           %td
           %td
-  %h2 Total amount: #{@billing.total_amount} $
+          %td= number_to_currency(Billing.calculate_room(reserved_room),unit: "CAD$", format: "%n %u")
+  %br/
+  %h2 Total amount: #{number_to_currency(@billing.total_amount, unit: "CAD$", format: "%n %u")}
 

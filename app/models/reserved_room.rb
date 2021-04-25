@@ -21,4 +21,7 @@ class ReservedRoom < ActiveRecord::Base
   def name
     self.room.name
   end
+  def rate
+    self.room.base_rate.rate
+  end
 end
