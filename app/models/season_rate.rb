@@ -15,4 +15,16 @@ class SeasonRate < ActiveRecord::Base
 
     applicable
   end
+  def self.applied(date_begin, date_end)
+    applied = []
+    date = date_begin
+
+    while date <= date_end
+      applicable_seasons = self.between_dates(date).select([:name, :rate])
+      applied.append(applicable_seasons)
+      date = date + 1
+    end
+
+    applied
+  end
 end

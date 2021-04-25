@@ -12,4 +12,15 @@ class DayRate < ActiveRecord::Base
 
     applicable
   end
+  def self.applied(date_begin, date_end)
+    applied = []
+    date = date_begin
+
+    while date <= date_end
+      applied.append(self.where(name: date.strftime("%A")))
+      date = date + 1
+    end
+
+    applied
+  end
 end
