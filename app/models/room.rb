@@ -5,6 +5,9 @@ class Room < ActiveRecord::Base
   belongs_to :view_type
   has_many :reserved_rooms
   validates :base_rate_id, :floor, :name, :room_type_id, :view_type_id, presence: true
+  scope :not_deleted, -> {
+    where(deleted_at: nil)
+  }
   scope :unavailable, -> {
     joins(:reserved_rooms).merge(ReservedRoom.not_deleted)
   }
@@ -19,5 +22,11 @@ class Room < ActiveRecord::Base
   }
   scope :by_view, ->(view_type_id) {
     where('view_type_id IS ?', view_type_id)
+  }
+  scope :unavailable_today, -> {
+    joins(:reserved_rooms).merge(ReservedRoom.unavailable_today)
+  }
+  scope :available_today, -> {
+    where('id NOT IN (?)', unavailable_today)
   }
 end

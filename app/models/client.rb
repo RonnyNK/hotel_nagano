@@ -4,6 +4,9 @@ class Client < ActiveRecord::Base
   has_many :reserved_rooms, :through => :reservations
   validates :email, :first_name, :last_name, presence: true
   validates :email, uniqueness: true
+  scope :not_deleted, -> {
+    where(deleted_at: nil)
+  }
   scope :with_reservations, -> { joins(:reservations)}
   def full_name
     "#{first_name} #{last_name}"
