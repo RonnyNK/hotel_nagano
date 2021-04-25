@@ -7,7 +7,6 @@
         %th Last Name
         %th Email
         %th
-        %th
     %tbody
       - @clients.each do |client|
         %tr
@@ -15,6 +14,5 @@
           %td= client.last_name
           %td= client.email
           %td= link_to 'Show', client
-          %td= link_to 'Edit', edit_client_path(client)
 
   = link_to 'New Client', new_client_path

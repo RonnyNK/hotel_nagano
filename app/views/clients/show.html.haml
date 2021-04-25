@@ -28,7 +28,7 @@
             %td= reservation.date_out
             %td= reservation.demands
             %td= (reservation.rooms.map{|room| room.name}).join(', ')
-            %td= link_to "Show", reservation
+            %td= link_to "Show", client_reservation_path(reservation)
             %td= link_to "Billing", billing_path(reservation)
 
   = link_to 'Edit', edit_client_path(@client)

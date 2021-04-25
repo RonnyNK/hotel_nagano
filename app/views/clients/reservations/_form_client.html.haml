@@ -1,0 +1,16 @@
+= form_for([@client, @client.reservations.build]) do |f|
+  .field
+    = f.label "Date Check In"
+    %br/
+    = f.text_field :date_in, 'data-behaviour' => 'datepicker'
+  .field
+    = f.label "Date Check Out"
+    %br/
+    = f.text_field :date_out, 'data-behaviour' => 'datepicker'
+  .field
+    = f.label :demands
+    %br/
+    = f.text_area :demands, cols: 30, rows: 5
+
+  .actions
+    = f.submit

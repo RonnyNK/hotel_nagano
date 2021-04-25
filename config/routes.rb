@@ -2,15 +2,14 @@ HotelNagano::Application.routes.draw do
 
   resources :billing
 
-  resources :statistics
-
-  resources :admin
-
-  resources :rooms
+  namespace :admin do
+    resources :clients
+    resources :reservations
+    resources :rooms
+    resources :statistics
+  end
 
   resources :reserved_rooms
-
-  resources :reservations
 
   resources :clients do
     resources :reservations

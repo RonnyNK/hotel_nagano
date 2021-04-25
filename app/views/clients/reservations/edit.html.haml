@@ -1,0 +1,6 @@
+.container
+  %h1 Editing reservation
+  = render 'form'
+  = link_to 'Show', admin_reservation_path(@reservation)
+  |
+  = link_to 'Back', admin_reservations_path

@@ -1,0 +1,22 @@
+.container-fluid
+  %h1 Reservations
+  %table.table.table-hover
+    %thead.table-primary
+      %tr
+        %th Check In
+        %th Check Out
+        %th Client
+        %th
+        %th
+        %th
+    - @reservations.each do |reservation|
+      %tr
+        %td= reservation.date_in
+        %td= reservation.date_out
+        %td= link_to reservation.client.full_name, admin_client_path(reservation.client)
+        %td= link_to 'Show', admin_reservation_path(reservation)
+        %td= link_to 'Edit', edit_admin_reservation_path(reservation)
+        %td= link_to 'Delete', admin_reservation_path(reservation), method: :delete, data: { confirm: 'Are you sure?' },
+        remote: true, class: 'delete_reservation'
+  %br/
+  = link_to 'New Reservation', reserved_rooms_path
