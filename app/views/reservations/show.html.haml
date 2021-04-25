@@ -25,6 +25,4 @@
   %p
     =link_to 'Billing details', billing_path(@reservation)
 
-  = link_to 'Edit', edit_reservation_path([@reservation, @client])
-  |
-  = link_to 'Back', reservations_path
+  = link_to 'Back', client_path(@client)

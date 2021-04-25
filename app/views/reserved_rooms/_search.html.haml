@@ -1,8 +1,8 @@
 %h3 Search for available rooms
-= form_tag reserved_rooms_path, method: :get, class: "from-group", remote: true do
+= form_tag reserved_rooms_path, method: :get, class: "form-group", remote: true do
 
   = label_tag "Number of rooms"
-  = text_field_tag :number_rooms, params[:number_rooms], :onkeyup => 'this.form.submit();'
+  = text_field_tag :number_rooms, params[:number_rooms], :onchange => 'checkbox(this)'
 
   %br/
   = label_tag "Check In: "

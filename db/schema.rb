@@ -44,7 +44,6 @@ ActiveRecord::Schema.define(:version => 20210420172754) do
 
   create_table "reservations", :force => true do |t|
     t.integer  "client_id"
-    t.date     "reserved_at"
     t.date     "date_in"
     t.date     "date_out"
     t.text     "demands"
