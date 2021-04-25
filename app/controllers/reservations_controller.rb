@@ -1,6 +1,6 @@
 class ReservationsController < ApplicationController
   def index
-    @reservations = Reservation.order(:date_in).all
+    @reservations = Reservation.order(:date_in).not_deleted
   end
 
   def show
@@ -50,7 +50,7 @@ class ReservationsController < ApplicationController
 
   def destroy
     @reservation = Reservation.find(params[:id])
-    @reservation.reserved_rooms.update_all(deleted_at: true)
+    @reservation.reserved_rooms.update_all(deleted_at: Date.current)
     @reservation.destroy
 
     respond_to do |format|

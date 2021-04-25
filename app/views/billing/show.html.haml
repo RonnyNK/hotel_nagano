@@ -1,2 +1,39 @@
-%h1 Billing details of #{@client.first_name}'s reservation
-%p Total amount: #{@billing.total_amount}
+.container-fluid
+  %h1 Billing details of #{@client.first_name}'s reservation
+  %br/
+  %h2 Rooms reserved
+  - @reserved_rooms.each do |reserved_room|
+    %p
+      %b Room name:
+      = reserved_room.name
+    %p
+      %b View Type:
+      = reserved_room.room.view_type.name
+    %p
+      %b Room Type:
+      = reserved_room.room.room_type.name
+    %table.table.table-hover
+      %thead.table-primary
+        %tr
+          %th Date
+          %th Base Rate
+          %th Day Rate
+          %th Season Rate
+          %th Total
+      %tbody
+        - (0..@reservation.duration-1).each do |i|
+          %tr
+            %td= (@reservation.date_in + i).strftime("%a, %m-%d-%Y")
+            %td= "#{reserved_room.room.base_rate.rate}" + ' $'
+            %td= number_to_percentage(@applied_days[i][0].rate * 100, precision: 0)
+            %td= @applied_seasons[i].map{|season| season.name + ": " + number_to_percentage(season.rate * 100, precision: 0)}.join(", ")
+            %td
+      %tfooter
+        %tr
+          %th Total
+          %td= "#{@reservation.duration * reserved_room.room.base_rate.rate}" + ' $'
+          %td
+          %td
+          %td
+  %h2 Total amount: #{@billing.total_amount} $
+

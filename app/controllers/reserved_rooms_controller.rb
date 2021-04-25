@@ -19,7 +19,7 @@ class ReservedRoomsController < ApplicationController
       end
 
     else
-      @rooms = Room.available
+      @rooms = Room.not_deleted
     end
 
     respond_to do |format|
