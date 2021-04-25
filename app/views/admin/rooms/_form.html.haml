@@ -1,0 +1,37 @@
+.needs-validation
+  = form_for([:admin, @room], :html => {:class => "form-group"}) do |f|
+    - if @room.errors.any?
+      #errorExplanation
+        %h2
+          = pluralize(@room.errors.count, "error")
+          prohibited
+          this room from being saved:
+        %ul
+          - @room.errors.full_messages.each do |msg|
+            %li= msg
+    .field
+      = f.label :name
+      %br/
+      = f.text_field :name, type: "text", class: "form-control", autocomplete: "off", required: true
+    .field
+      = f.label :next_door
+      %br/
+      = f.text_field :next_door, type: "number", class: "form-control", autocomplete: "off", min: "1", max: "12"
+    .field
+      = f.label :floor
+      %br/
+      = f.text_field :floor, type: "number", class: "form-control", autocomplete: "off", required: true, min: "1", max: "3"
+    .field
+      = f.label :view_type_id
+      %br/
+      = f.collection_select :view_type_id, ViewType.all, :id, :name
+    .field
+      = f.label :room_type_id
+      %br/
+      = f.collection_select :room_type_id, RoomType.all, :id, :name
+    .field
+      = f.label :base_rate_id
+      %br/
+      = f.text_field :base_rate_id
+    .actions
+      = f.submit(class: "btn btn-primary")

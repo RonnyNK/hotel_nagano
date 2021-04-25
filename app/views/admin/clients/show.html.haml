@@ -1,0 +1,36 @@
+.container-fluid
+  %p#notice= notice
+  %p
+    %b First Name:
+    = @client.first_name
+  %p
+    %b Last Name:
+    = @client.last_name
+  %p
+    %b Email:
+    = @client.email
+
+  - if @reservations.any?
+    %h2 Reservations
+    %table.table.table-hover
+      %thead.table-primary
+        %tr
+          %th Check In
+          %th Check Out
+          %th Demands
+          %th Reserved rooms
+          %th
+          %th
+      %tbody
+        - @reservations.each do |reservation|
+          %tr
+            %td= reservation.date_in
+            %td= reservation.date_out
+            %td= reservation.demands
+            %td= (reservation.rooms.map{|room| room.name}).join(', ')
+            %td= link_to "Show", reservation
+            %td= link_to "Billing", billing_path(reservation)
+
+  = link_to 'Edit', edit_admin_client_path(@client)
+  |
+  = link_to 'Back', admin_clients_path

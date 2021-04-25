@@ -1,0 +1,28 @@
+.container-fluid
+  %h1 Listing Rooms
+
+  %table.table.table-hover
+    %thead.table-primary
+      %tr
+        %th Room Name
+        %th Room Floor
+        %th View Type
+        %th Room Type
+        %th Base Rate (CAD)
+        %th
+        %th
+        %th
+      %tbody
+        - @rooms.each do |room|
+          %tr
+            %td= room.name
+            %td= room.floor
+            %td= room.view_type.name
+            %td= room.room_type.name
+            %td= "#{room.base_rate.rate}$"
+            %td= link_to 'Show', admin_room_path(room)
+            %td= link_to 'Edit', edit_admin_room_path(room)
+            %td= link_to 'Destroy', admin_room_path(room),
+            method: :delete, data: { confirm: 'Are you sure?' }
+  %br/
+  = link_to 'New Room', new_admin_room_path

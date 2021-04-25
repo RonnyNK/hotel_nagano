@@ -1,0 +1,26 @@
+.needs-validation
+  = form_for([:admin, @client], :html => {:class => "form-group"}) do |f|
+    - if @client.errors.any?
+      #errorExplanation
+        %h2
+          = pluralize(@client.errors.count, "error")
+          prohibited
+          this client from being saved:
+        %ul
+          - @client.errors.full_messages.each do |msg|
+            %li= msg
+    .field
+      = f.label :first_name
+      %br/
+      = f.text_field :first_name, class: "form-control", placeholder: "François", autocomplete: "off", required: true
+    .field
+      = f.label :last_name
+      %br/
+      = f.text_field :last_name, class: "form-control", placeholder: "Lecave", autocomplete: "off", required: true
+    .field
+      = f.label :email
+      %br/
+      = f.email_field :email, class: "form-control", placeholder: "François.Lecave@gros.gouv.suce.culsec.ca", autocomplete: "off", required: true
+    %br/
+    .actions
+      = f.submit(class: "btn btn-primary")

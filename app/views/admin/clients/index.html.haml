@@ -1,0 +1,23 @@
+.container-fluid
+  %h2 Listing clients
+  %table.table.table-hover
+    %thead.table-primary
+      %tr
+        %th First Name
+        %th Last Name
+        %th Email
+        %th
+        %th
+        %th
+    %tbody
+      - @clients.each do |client|
+        %tr
+          %td= client.first_name
+          %td= client.last_name
+          %td= client.email
+          %td= link_to 'Show', admin_client_path(client)
+          %td= link_to 'Edit', edit_admin_client_path(client)
+          %td= link_to 'Delete', admin_client_path(client), method: :delete, data: { confirm: 'Are you sure?' },
+            remote: true, class: 'delete_client'
+
+  = link_to 'New Client', new_admin_client_path
