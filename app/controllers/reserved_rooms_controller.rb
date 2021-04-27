@@ -73,10 +73,29 @@ class ReservedRoomsController < ApplicationController
 
   def create
     @client = Client.find(params[:client_id])
+
     reservation = @client.reservations.last
     reservation.reserving = false
     reservation.demands = params[:demands]
     reservation.save
+
+    reserved_rooms = reservation.reserved_rooms
+    reserved_rooms.each do |reserved_room|
+      reserved_room.destroy
+    end
+
+    @reserved_rooms = []
+    params[:room_ids].each do |room_id|
+      reserved_room = ReservedRoom.new
+      reserved_room.room_id = room_id
+      reserved_room.reservation_id = reservation.id
+      reserved_room.save
+      @reserved_rooms.append(reserved_room)
+    end
+
+    @reserved_rooms.each do |reserved_room|
+      reserved_room.priced_at = Billing.calculate_room(reserved_room)
+    end
 
     ClientMailer.billing_reservation(@client).deliver
     redirect_to client_path(@client)
