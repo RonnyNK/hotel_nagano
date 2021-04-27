@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(:version => 20210420172754) do
   end
 
   create_table "reserved_rooms", :force => true do |t|
+    t.decimal  "priced_at"
     t.integer  "room_id"
     t.integer  "reservation_id"
     t.date     "deleted_at"
