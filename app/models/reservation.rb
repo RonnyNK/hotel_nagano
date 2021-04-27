@@ -1,10 +1,14 @@
 class Reservation < ActiveRecord::Base
-  attr_accessible :client_id, :date_in, :date_out, :deleted_at, :demands, :billing_id
+  attr_accessible :client_id, :date_in, :date_out, :deleted_at, :demands, :billing_id, :reserving
   belongs_to :client
   belongs_to :billing
-  has_many :reserved_rooms
+  has_many :reserved_rooms, dependent: :destroy
   has_many :rooms, :through => :reserved_rooms
   validates :client_id, :date_in, :date_out, presence: true
+
+  scope :reservings, -> {
+    where(reserving: true)
+  }
   scope :not_deleted, -> {
     where(deleted_at: nil)
   }

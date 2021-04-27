@@ -29,4 +29,7 @@ class Room < ActiveRecord::Base
   scope :available_today, -> {
     where('id NOT IN (?)', unavailable_today)
   }
+  def rate
+    self.base_rate.rate
+  end
 end

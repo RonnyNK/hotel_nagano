@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(:version => 20210420172754) do
     t.text     "demands"
     t.date     "deleted_at"
     t.integer  "billing_id"
+    t.boolean  "reserving"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
