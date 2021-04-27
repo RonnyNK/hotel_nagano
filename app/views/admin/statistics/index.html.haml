@@ -1,19 +1,27 @@
-%h1 Business Report of today
+.container
+  %h1 Business Report of today
 
-%table
-  %tr
-    %th Room Name
-    %th View Type
-    %th Room Type
-    %th Price (CAD)
+  %table.table.table-hover
+    %thead.table-primary
+      %tr
+        %th Room Name
+        %th View Type
+        %th Room Type
+        %th Price
+        %th Cleanup today?
 
-  - @rooms.each do |room|
-    %tr
-      %td= room.name
-      %td= room.view_type.name
-      %td= room.room_type.name
-      %td= "#{room.base_rate.rate}" + " $"
+    - @reserved_rooms.each do |reserved_room|
+      %tr
+        %td= reserved_room.name
+        %td= reserved_room.view_type.name
+        %td= reserved_room.room_type.name
+        %td= number_to_currency(Billing.calculate_room_date(reserved_room, Date.current), unit: "CAD$", format: "%n %u")
+        %td= reserved_room.clean_up ? "Yes" : "No"
+  %br/
+  = label_tag "Occupancy rate: "
+  = number_to_percentage(@occupancy_rate, precision: 2)
 
-%br/
-= label_tag "Occupancy rate (%): "
-= @occupancy_rate
+  %br/
+  = label_tag "Revenue: "
+  = number_to_currency(@revenue, unit: "CAD$", format: "%n %u")
+

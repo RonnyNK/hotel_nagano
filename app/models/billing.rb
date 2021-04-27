@@ -2,6 +2,12 @@ class Billing < ActiveRecord::Base
   attr_accessible :total_amount
   has_one :reservation
 
+  def self.applied_special_rate(date)
+    applied_day_rate = DayRate.applied_rate(date)
+    applied_season_rate = SeasonRate.applied_rate(date)
+
+    applied_day_rate + applied_season_rate
+  end
   def self.applied_special_rates(date_in, date_out)
     applied_day_rates = DayRate.applied_rates(date_in, date_out)
     applied_season_rates = SeasonRate.applied_rates(date_in, date_out)
@@ -19,6 +25,11 @@ class Billing < ActiveRecord::Base
         self.create(total_amount: total_amount)
       end
     end
+  end
+
+  def self.calculate_room_date(reserved_room, date)
+    applied_special_rate = applied_special_rate(date)
+    reserved_room.rate + (applied_special_rate * reserved_room.rate)
   end
 
   def self.calculate_room(reserved_room)

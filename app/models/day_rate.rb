@@ -1,6 +1,9 @@
 class DayRate < ActiveRecord::Base
   attr_accessible :name, :rate
   validates :name, :rate, presence: true
+  def self.applied_rate(date)
+    (self.where(name: date.strftime("%A"))).pluck(:rate)[0]
+  end
   def self.applied_rates(date_begin, date_end)
     applicable = []
     date = date_begin

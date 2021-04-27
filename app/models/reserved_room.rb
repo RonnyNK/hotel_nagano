@@ -25,4 +25,13 @@ class ReservedRoom < ActiveRecord::Base
   def rate
     self.room.base_rate.rate
   end
+  def view_type
+    self.room.view_type
+  end
+  def room_type
+    self.room.room_type
+  end
+  def clean_up
+    self.reservation.date_out == Date.current
+  end
 end
