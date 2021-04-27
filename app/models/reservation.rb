@@ -5,6 +5,7 @@ class Reservation < ActiveRecord::Base
   has_many :reserved_rooms, dependent: :destroy
   has_many :rooms, :through => :reserved_rooms
   validates :client_id, :date_in, :date_out, presence: true
+  validate :dates
 
   scope :reservings, -> {
     where(reserving: true)
@@ -20,5 +21,17 @@ class Reservation < ActiveRecord::Base
   }
   def duration
     (date_out - date_in).to_i + 1
+  end
+
+  private
+
+  def dates
+    return if date_in.blank? || date_out.blank?
+    if date_in < Date.current
+      errors.add(:date_in, "cannot be before today")
+    end
+    if date_out < date_in
+      errors.add(:date_out, "cannot be before date_in")
+    end
   end
 end
